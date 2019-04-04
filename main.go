@@ -2,21 +2,27 @@ package main
 
 import (
 	"encoding/json"
+	"flag"
 	"fmt"
 	"log"
 	"net/http"
 	"net/http/httputil"
 	"net/url"
 	"os"
+	"strconv"
 	"strings"
 )
 
 var routes map[string]string
 
 func main() {
-	// portPtr := flag.Int("port", 80, "port to run")
-	// flag.Parse()
-	args := os.Args[1:]
+	portPtr := flag.Int("port", 80, "port to run")
+	flag.Parse()
+	port := 80
+	if portPtr != nil {
+		port = *portPtr
+	}
+	args := flag.Args()
 	routes = make(map[string]string)
 	for _, a := range args {
 		r := strings.Split(a, "->")
@@ -30,7 +36,7 @@ func main() {
 		return
 	}
 	http.HandleFunc("/", handler)
-	err := http.ListenAndServe(":80", nil)
+	err := http.ListenAndServe(":"+strconv.Itoa(port), nil)
 	if err != nil {
 		panic(err)
 	}

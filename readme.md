@@ -8,8 +8,11 @@ run this application and path needed routes
 
 Desired URL should be specify in the hosts file to point to the localhost.
 
+Optionally you can path port on which you want the listener should run on.
+
 ## Example:
 `local-routing 'foo.loc->http://localhost:8080/foo/htdocs/'`
+`local-routing -port=8888 'foo.loc->http://localhost:8080/foo/htdocs/'`
 `local-routing 'foo.loc->http://localhost:8080/foo/htdocs/' 'bar.loc->http://localhost:8080/bar/link/'`
 ### Hosts:
 `127.0.0.1	foo.loc`
